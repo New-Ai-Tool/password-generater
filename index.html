@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online password strength checker. Analyze your password security instantly with our advanced strength meter and get actionable tips for stronger passwords.">
+    <meta name="keywords" content="password checker, password strength, password security, password analyzer, online security tool">
+    <meta name="author" content="SecurityTools">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Password Strength Analyzer | Free Online Security Tool">
+    <meta property="og:description" content="Check your password strength instantly. Get a security score and recommendations for stronger passwords.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Crect fill='%231a365d' width='1200' height='630'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='48' x='50%25' y='40%25' dominant-baseline='middle' text-anchor='middle'%3EPassword Strength Analyzer%3C/text%3E%3Ctext fill='%23a0d2ff' font-family='Arial' font-size='28' x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle'%3EInstant Security Assessment%3C/text%3E%3C/svg%3E">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Password Strength Analyzer | Free Online Security Tool">
+    <meta name="twitter:description" content="Check your password strength instantly. Get a security score and recommendations for stronger passwords.">
+    <meta name="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Crect fill='%231a365d' width='1200' height='630'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='48' x='50%25' y='40%25' dominant-baseline='middle' text-anchor='middle'%3EPassword Strength Analyzer%3C/text%3E%3Ctext fill='%23a0d2ff' font-family='Arial' font-size='28' x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle'%3EInstant Security Assessment%3C/text%3E%3C/svg%3E">
+    
+    <!-- Favicon (Multi-resolution) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlBhc3N3b3JkIFN0cmVuZ3RoIEFuYWx5emVyIiwKICAic2hvcnRfbmFtZSI6ICJQYXNzd29yZCBDaGVja2VyIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMxYTM2NWQiLAogICJ0aGVtZV9jb2xvciI6ICIjMWFhMzdkIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiL2Fzc2V0cy9nbG9iYWwvaWNvbnMvaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIgogICAgfQogIF0KfQ==">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://password-analyzer.example.com">
+    
+    <!-- Hreflang for Multilingual Support -->
+    <link rel="alternate" hreflang="en" href="https://password-analyzer.example.com/en">
+    <link rel="alternate" hreflang="es" href="https://password-analyzer.example.com/es">
+    <link rel="alternate" hreflang="fr" href="https://password-analyzer.example.com/fr">
+    <link rel="alternate" hreflang="de" href="https://password-analyzer.example.com/de">
+    
+    <title>Password Strength Analyzer | Free Online Security Tool</title>
+    
+    <style>
+        /* Critical CSS - Above the Fold */
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2a4b8d;
+            --secondary: #e53e3e;
+            --accent: #38a169;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+            --light-gray: #e2e8f0;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--secondary);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #c53030;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            font-weight: 600;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Tool Container */
+        .tool-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin: -50px auto 50px;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .tool-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tool-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .password-input-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .password-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.2);
+        }
+        
+        .toggle-visibility {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+        
+        .strength-meter {
+            height: 12px;
+            background: var(--light-gray);
+            border-radius: 6px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+        
+        .strength-bar {
+            height: 100%;
+            width: 0;
+            background: var(--secondary);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        .strength-text {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .strength-description {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .requirements {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .requirements h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .requirements ul {
+            list-style: none;
+        }
+        
+        .requirements li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .requirement-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .requirement-met {
+            color: var(--accent);
+        }
+        
+        .requirement-not-met {
+            color: var(--gray);
+        }
+        
+        .password-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* SEO Content Section */
+        .seo-content {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .seo-content h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+        
+        .seo-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 30px 0 15px;
+        }
+        
+        .seo-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .seo-content ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .seo-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        /* Page Content */
+        .page-content {
+            padding: 80px 0;
+            min-height: 60vh;
+        }
+        
+        .page-content h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+        
+        .page-content h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 40px 0 20px;
+        }
+        
+        .page-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 30px 0 15px;
+        }
+        
+        .page-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .page-content ul, .page-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .page-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .page-content .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Ad Unit */
+        .ad-unit {
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border: 1px dashed var(--gray);
+        }
+        
+        .ad-label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        /* Consent Banner */
+        .consent-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .consent-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .consent-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tool-container {
+                padding: 30px 20px;
+                margin: -30px auto 30px;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            nav.active ul {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .password-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .password-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .consent-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .consent-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo" data-page="home">
+                <span class="logo-icon">🔒</span>
+                <span>PasswordStrength</span>
+            </a>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="tools">Tools</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="security-tips">Security Tips</a></li>
+                    <li><a href="#" data-page="privacy">Privacy Policy</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="contentArea">
+        <!-- Home Page Content -->
+        <div id="homePage" class="page-content">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <h1>Password Strength Analyzer</h1>
+                    <p>Check your password security instantly with our advanced strength meter and get actionable tips for stronger passwords</p>
+                    <a href="#tool" class="btn btn-secondary">Try It Now</a>
+                </div>
+            </section>
+
+            <!-- Password Strength Tool -->
+            <section id="tool" class="container">
+                <div class="tool-container">
+                    <div class="tool-title">
+                        <h2>Password Strength Checker</h2>
+                        <p>Enter your password below to test its security strength</p>
+                    </div>
+                    
+                    <div class="password-input-container">
+                        <input type="password" id="passwordInput" class="password-input" placeholder="Enter your password..." autocomplete="off">
+                        <button class="toggle-visibility" id="toggleVisibility">👁️</button>
+                    </div>
+                    
+                    <div class="strength-meter">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    
+                    <div class="strength-text" id="strengthText">Enter a password to begin analysis</div>
+                    <div class="strength-description" id="strengthDescription">We'll evaluate your password based on length, complexity, and common patterns.</div>
+                    
+                    <div class="requirements">
+                        <h3>Password Requirements</h3>
+                        <ul>
+                            <li id="lengthReq">
+                                <span class="requirement-icon">❌</span>
+                                <span>At least 12 characters</span>
+                            </li>
+                            <li id="uppercaseReq">
+                                <span class="requirement-icon">❌</span>
+                                <span>Uppercase letters (A-Z)</span>
+                            </li>
+                            <li id="lowercaseReq">
+                                <span class="requirement-icon">❌</span>
+                                <span>Lowercase letters (a-z)</span>
+                            </li>
+                            <li id="numberReq">
+                                <span class="requirement-icon">❌</span>
+                                <span>Numbers (0-9)</span>
+                            </li>
+                            <li id="specialReq">
+                                <span class="requirement-icon">❌</span>
+                                <span>Special characters (!@#$%^&*)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="password-actions">
+                        <button class="btn" id="generatePassword">Generate Strong Password</button>
+                        <button class="btn btn-secondary" id="analyzePassword">Analyze Password</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Advanced Password Analysis</h2>
+                        <p>Our tool uses multiple criteria to evaluate password security and provide actionable insights</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h3>Comprehensive Security Scan</h3>
+                            <p>We analyze your password against multiple security criteria including length, character diversity, and pattern detection.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">⏱️</div>
+                            <h3>Hacking Time Estimate</h3>
+                            <p>Get an estimate of how long it would take a hacker to crack your password with modern computing power.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔐</div>
+                            <h3>Privacy Protection</h3>
+                            <p>Your password is never stored or transmitted to our servers. All analysis happens locally in your browser.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🌐</div>
+                            <h3>Global Security Standards</h3>
+                            <p>Our algorithm follows international security standards including NIST and OWASP recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section id="how-it-works" class="how-it-works">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>How Our Password Analyzer Works</h2>
+                        <p>Understanding the technology behind our security assessment</p>
+                    </div>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Input Your Password</h3>
+                            <p>Type or paste your password into our secure analyzer. All processing happens locally in your browser.</p>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Advanced Algorithm Analysis</h3>
+                            <p>Our algorithm checks multiple security factors including length, complexity, entropy, and common patterns.</p>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Instant Security Report</h3>
+                            <p>Receive a detailed assessment of your password's strength with specific recommendations for improvement.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ad Unit -->
+            <div class="container">
+                <div class="ad-unit">
+                    <span class="ad-label">Advertisement</span>
+                    <div>Password Manager Partner Advertisement</div>
+                </div>
+            </div>
+
+            <!-- SEO Content Section -->
+            <section id="security-tips" class="seo-content">
+                <div class="container content-container">
+                    <h2>Why Password Strength Matters for Your Online Security</h2>
+                    
+                    <p>In today's digital world, passwords are the first line of defense against unauthorized access to your personal and financial information. Weak passwords are responsible for over 80% of data breaches, making password strength a critical component of your online security.</p>
+                    
+                    <h3>Understanding Password Vulnerabilities</h3>
+                    
+                    <p>Hackers use sophisticated techniques to crack passwords, including:</p>
+                    
+                    <ul>
+                        <li><strong>Brute force attacks:</strong> Automated attempts to try every possible combination</li>
+                        <li><strong>Dictionary attacks:</strong> Using common words and phrases from dictionaries</li>
+                        <li><strong>Phishing schemes:</strong> Tricking users into revealing their passwords</li>
+                        <li><strong>Credential stuffing:</strong> Using stolen passwords from one site on other accounts</li>
+                    </ul>
+                    
+                    <h3>Creating Strong Passwords: Best Practices</h3>
+                    
+                    <p>Follow these guidelines to create passwords that are both secure and memorable:</p>
+                    
+                    <ul>
+                        <li>Use at least 12 characters - longer passwords are exponentially harder to crack</li>
+                        <li>Combine uppercase letters, lowercase letters, numbers, and symbols</li>
+                        <li>Avoid common words, phrases, or personal information</li>
+                        <li>Don't reuse passwords across multiple accounts</li>
+                        <li>Consider using passphrases (a series of random words) instead of complex strings</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tools Page Content -->
+        <div id="toolsPage" class="page-content" style="display:none;">
+            <div class="container">
+                <div class="content-container">
+                    <h1>Our Security Tools</h1>
+                    <p>Explore our suite of free security tools designed to help you protect your online accounts and personal information.</p>
+                    
+                    <div class="features-grid" style="margin-top: 50px;">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔑</div>
+                            <h3>Password Generator</h3>
+                            <p>Create strong, unique passwords instantly with our customizable password generator. Specify length, character types, and complexity.</p>
+                            <button class="btn" style="margin-top: 15px;">Generate Password</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📋</div>
+                            <h3>Password Manager</h3>
+                            <p>Safely store and organize all your passwords in one secure location with browser-based encryption and synchronization.</p>
+                            <button class="btn" style="margin-top: 15px;">Get Started</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🛡️</div>
+                            <h3>Two-Factor Authenticator</h3>
+                            <p>Add an extra layer of security to your accounts with our time-based one-time password (TOTP) generator.</p>
+                            <button class="btn" style="margin-top: 15px;">Enable 2FA</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔎</div>
+                            <h3>Data Breach Checker</h3>
+                            <p>Check if your email or password has been compromised in any known data breaches with our security scanner.</p>
+                            <button class="btn" style="margin-top: 15px;">Check Security</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ad-unit" style="margin: 60px 0;">
+                        <span class="ad-label">Advertisement</span>
+                        <div>Premium Password Manager - Special Offer</div>
+                    </div>
+                    
+                    <h2>Why Use Our Security Tools?</h2>
+                    <p>Our tools are designed with both security and usability in mind. Here's what makes them different:</p>
+                    
+                    <ul>
+                        <li><strong>Privacy First:</strong> All tools operate locally in your browser - no data is sent to our servers</li>
+                        <li><strong>Open Source:</strong> Our tools are open source and regularly audited by security professionals</li>
+                        <li><strong>Accessibility:</strong> Designed to work for everyone, regardless of technical expertise</li>
+                        <li><strong>Always Free:</strong> We believe security tools should be accessible to everyone at no cost</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page Content -->
+        <div id="aboutPage" class="page-content" style="display:none;">
+            <div class="container">
+                <div class="content-container">
+                    <h1>About PasswordStrength</h1>
+                    <p>We're on a mission to make digital security accessible to everyone. PasswordStrength was founded in 2023 by a team of security experts who were tired of seeing people fall victim to preventable security breaches.</p>
+                    
+                    <div style="display: flex; gap: 30px; margin: 40px 0; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h2>Our Mission</h2>
+                            <p>To empower individuals and businesses with the knowledge and tools they need to protect their digital lives. We believe that security shouldn't be complicated or expensive.</p>
+                        </div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h2>Our Values</h2>
+                            <ul>
+                                <li>Privacy as a fundamental human right</li>
+                                <li>Transparency in everything we do</li>
+                                <li>Accessibility for all users</li>
+                                <li>Education as the foundation of security</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h2>Our Team</h2>
+                    <p>We're a distributed team of security professionals, developers, and educators with decades of combined experience in cybersecurity.</p>
+                    
+                    <div class="features-grid" style="margin: 40px 0;">
+                        <div class="feature-card">
+                            <div style="width: 100px; height: 100px; background: var(--light-gray); border-radius: 50%; margin: 0 auto 20px;"></div>
+                            <h3>Alex Johnson</h3>
+                            <p>Founder & Security Architect</p>
+                            <p>15+ years in cybersecurity, former head of security at a Fortune 500 company</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div style="width: 100px; height: 100px; background: var(--light-gray); border-radius: 50%; margin: 0 auto 20px;"></div>
+                            <h3>Maria Rodriguez</h3>
+                            <p>Lead Developer</p>
+                            <p>Full-stack developer with a passion for security and open source technology</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div style="width: 100px; height: 100px; background: var(--light-gray); border-radius: 50%; margin: 0 auto 20px;"></div>
+                            <h3>James Wilson</h3>
+                            <p>Security Researcher</p>
+                            <p>Specializes in cryptographic systems and password security vulnerabilities</p>
+                        </div>
+                    </div>
+                    
+                    <h2>Our Technology</h2>
+                    <p>All our tools are built with modern web technologies that prioritize security and performance:</p>
+                    
+                    <ul>
+                        <li>Client-side processing ensures your sensitive data never leaves your device</li>
+                        <li>Regular security audits by independent third parties</li>
+                        <li>Open source codebase available for public review on GitHub</li>
+                        <li>Continuous monitoring for vulnerabilities and threats</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Tips Page -->
+        <div id="securityTipsPage" class="page-content" style="display:none;">
+            <div class="container">
+                <div class="content-container">
+                    <h1>Essential Password Security Tips</h1>
+                    <p>Protect your online accounts with these expert-recommended security practices.</p>
+                    
+                    <div class="ad-unit" style="margin: 40px 0;">
+                        <span class="ad-label">Advertisement</span>
+                        <div>Security Awareness Training - Special Discount</div>
+                    </div>
+                    
+                    <h2>Creating Strong Passwords</h2>
+                    <p>The foundation of good security starts with strong passwords:</p>
+                    
+                    <ul>
+                        <li><strong>Length matters most:</strong> Aim for at least 12 characters</li>
+                        <li><strong>Mix character types:</strong> Use upper/lower case, numbers, and symbols</li>
+                        <li><strong>Avoid personal information:</strong> Names, birthdays, and addresses are easy to guess</li>
+                        <li><strong>Don't reuse passwords:</strong> Use unique passwords for every account</li>
+                        <li><strong>Consider passphrases:</strong> "CorrectHorseBatteryStaple" is stronger than "P@ssw0rd!"</li>
+                    </ul>
+                    
+                    <h2>Password Management Best Practices</h2>
+                    
+                    <div style="display: flex; gap: 30px; margin: 30px 0; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                            <h3 style="color: var(--accent);">✅ Do This</h3>
+                            <ul>
+                                <li>Use a password manager</li>
+                                <li>Enable two-factor authentication</li>
+                                <li>Change passwords after a breach</li>
+                                <li>Use biometrics where available</li>
+                                <li>Review account security regularly</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                            <h3 style="color: var(--secondary);">❌ Avoid This</h3>
+                            <ul>
+                                <li>Writing passwords down</li>
+                                <li>Sharing passwords via email/text</li>
+                                <li>Using default passwords</li>
+                                <li>Password hints that reveal answers</li>
+                                <li>Saving passwords in browsers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h2>Advanced Security Measures</h2>
+                    
+                    <div class="features-grid" style="margin: 40px 0;">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔑</div>
+                            <h3>Two-Factor Authentication (2FA)</h3>
+                            <p>Add an extra layer of security beyond your password. Even if your password is compromised, attackers can't access your account without the second factor.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔄</div>
+                            <h3>Password Rotation</h3>
+                            <p>Regularly update your passwords, especially for critical accounts like email and banking. Consider changing them every 3-6 months.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📧</div>
+                            <h3>Security Alerts</h3>
+                            <p>Enable login alerts and notifications for suspicious activity. Many services will notify you when your account is accessed from a new device.</p>
+                        </div>
+                    </div>
+                    
+                    <h2>Recognizing Phishing Attempts</h2>
+                    <p>Many security breaches start with phishing. Protect yourself by:</p>
+                    
+                    <ul>
+                        <li>Verifying sender email addresses carefully</li>
+                        <li>Never clicking links in unsolicited emails</li>
+                        <li>Checking for poor grammar and spelling mistakes</li>
+                        <li>Looking for urgent or threatening language</li>
+                        <li>Hovering over links to see the actual destination</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Policy Page -->
+        <div id="privacyPage" class="page-content" style="display:none;">
+            <div class="container">
+                <div class="content-container">
+                    <h1>Privacy Policy</h1>
+                    <p><em>Last Updated: October 26, 2023</em></p>
+                    
+                    <p>At PasswordStrength, we take your privacy seriously. This policy explains how we handle your information when you use our website and tools.</p>
+                    
+                    <h2>Information We Collect</h2>
+                    <p>We collect minimal information to provide and improve our services:</p>
+                    
+                    <ul>
+                        <li><strong>Usage Data:</strong> We collect anonymous usage statistics to understand how our tools are used and to improve performance.</li>
+                        <li><strong>Cookies:</strong> We use cookies to remember your preferences and analyze site traffic. You can control cookies through your browser settings.</li>
+                        <li><strong>Analytics:</strong> We use privacy-focused analytics to understand traffic patterns without identifying individual users.</li>
+                    </ul>
+                    
+                    <h2>What We Don't Collect</h2>
+                    <p>We designed our tools with privacy as a core principle:</p>
+                    
+                    <ul>
+                        <li>We do not collect or store any passwords you enter into our analyzer</li>
+                        <li>We do not require registration or personal information to use our tools</li>
+                        <li>We do not sell or share your data with third parties for advertising</li>
+                        <li>We do not track you across other websites</li>
+                    </ul>
+                    
+                    <h2>Password Security</h2>
+                    <p>Our Password Strength Analyzer operates entirely in your browser:</p>
+                    
+                    <ul>
+                        <li>No password data is transmitted to our servers</li>
+                        <li>No password data is stored on your device beyond your current session</li>
+                        <li>All analysis happens locally using JavaScript in your browser</li>
+                    </ul>
+                    
+                    <h2>Data Security</h2>
+                    <p>We implement industry-standard security measures to protect our systems:</p>
+                    
+                    <ul>
+                        <li>Regular security audits and vulnerability testing</li>
+                        <li>HTTPS encryption for all website traffic</li>
+                        <li>Secure server infrastructure with firewalls and intrusion detection</li>
+                        <li>Limited access to data for our team members</li>
+                    </ul>
+                    
+                    <h2>Third-Party Services</h2>
+                    <p>We use a few trusted third-party services for essential functions:</p>
+                    
+                    <ul>
+                        <li><strong>Hosting Provider:</strong> Our website is hosted on a secure cloud platform</li>
+                        <li><strong>Analytics:</strong> We use a privacy-focused analytics service that anonymizes IP addresses</li>
+                        <li><strong>Advertising:</strong> We may display non-personalized ads to support our free services</li>
+                    </ul>
+                    
+                    <h2>Your Rights</h2>
+                    <p>Depending on your location, you may have certain rights regarding your data:</p>
+                    
+                    <ul>
+                        <li>The right to access information we hold about you</li>
+                        <li>The right to correct inaccurate information</li>
+                        <li>The right to request deletion of your data</li>
+                        <li>The right to object to certain processing activities</li>
+                    </ul>
+                    
+                    <h2>Changes to This Policy</h2>
+                    <p>We may update this privacy policy periodically. The latest version will always be available on this page with the "Last Updated" date at the top.</p>
+                    
+                    <h2>Contact Us</h2>
+                    <p>If you have questions about this privacy policy or our data practices, please contact us at privacy@passwordstrength.example.com.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Consent Banner -->
+    <div class="consent-banner" id="consentBanner">
+        <div class="consent-text">
+            <p>We use cookies to enhance your experience and analyze site traffic. By clicking "Accept", you consent to our use of cookies.</p>
+        </div>
+        <div class="consent-actions">
+            <button class="btn" id="acceptCookies">Accept</button>
+            <button class="btn btn-secondary" id="rejectCookies">Reject</button>
+            <a href="#" class="btn" data-page="privacy">Learn More</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>PasswordStrength</h3>
+                    <p>Your trusted resource for password security and online safety since 2023.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Security Tools</h3>
+                    <ul>
+                        <li><a href="#" data-page="tools">Password Generator</a></li>
+                        <li><a href="#" data-page="tools">Password Manager</a></li>
+                        <li><a href="#" data-page="tools">Two-Factor Authentication</a></li>
+                        <li><a href="#" data-page="tools">Security Audit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#" data-page="security-tips">Security Blog</a></li>
+                        <li><a href="#" data-page="security-tips">Password Security Guide</a></li>
+                        <li><a href="#" data-page="security-tips">Data Breach Alerts</a></li>
+                        <li><a href="#" data-page="security-tips">Security Glossary</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#" data-page="privacy">Privacy Policy</a></li>
+                        <li><a href="#" data-page="privacy">Terms of Service</a></li>
+                        <li><a href="#" data-page="privacy">Cookie Policy</a></li>
+                        <li><a href="#" data-page="privacy">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PasswordStrength. All rights reserved. This tool is for educational purposes only. We do not store any passwords entered into this analyzer.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all page elements
+            const homePage = document.getElementById('homePage');
+            const toolsPage = document.getElementById('toolsPage');
+            const aboutPage = document.getElementById('aboutPage');
+            const securityTipsPage = document.getElementById('securityTipsPage');
+            const privacyPage = document.getElementById('privacyPage');
+            
+            // Navigation elements
+            const navLinks = document.querySelectorAll('nav a, .footer-column a');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            // Set initial page
+            showPage('home');
+            
+            // Add event listeners to all navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    showPage(page);
+                    
+                    // Close mobile menu if open
+                    mainNav.classList.remove('active');
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // Function to show specific page and hide others
+            function showPage(pageId) {
+                // Hide all pages
+                homePage.style.display = 'none';
+                toolsPage.style.display = 'none';
+                aboutPage.style.display = 'none';
+                securityTipsPage.style.display = 'none';
+                privacyPage.style.display = 'none';
+                
+                // Show the requested page
+                switch(pageId) {
+                    case 'home':
+                        homePage.style.display = 'block';
+                        document.title = "Password Strength Analyzer | Free Online Security Tool";
+                        break;
+                    case 'tools':
+                        toolsPage.style.display = 'block';
+                        document.title = "Security Tools | PasswordStrength";
+                        break;
+                    case 'about':
+                        aboutPage.style.display = 'block';
+                        document.title = "About Us | PasswordStrength";
+                        break;
+                    case 'security-tips':
+                        securityTipsPage.style.display = 'block';
+                        document.title = "Security Tips | PasswordStrength";
+                        break;
+                    case 'privacy':
+                        privacyPage.style.display = 'block';
+                        document.title = "Privacy Policy | PasswordStrength";
+                        break;
+                    default:
+                        homePage.style.display = 'block';
+                        document.title = "Password Strength Analyzer | Free Online Security Tool";
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+            
+            // Password Strength Analyzer Logic
+            const passwordInput = document.getElementById('passwordInput');
+            const toggleVisibility = document.getElementById('toggleVisibility');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            const strengthDescription = document.getElementById('strengthDescription');
+            const generatePasswordBtn = document.getElementById('generatePassword');
+            const analyzePasswordBtn = document.getElementById('analyzePassword');
+            const consentBanner = document.getElementById('consentBanner');
+            const acceptCookies = document.getElementById('acceptCookies');
+            const rejectCookies = document.getElementById('rejectCookies');
+            
+            // Requirement elements
+            const lengthReq = document.getElementById('lengthReq');
+            const uppercaseReq = document.getElementById('uppercaseReq');
+            const lowercaseReq = document.getElementById('lowercaseReq');
+            const numberReq = document.getElementById('numberReq');
+            const specialReq = document.getElementById('specialReq');
+            
+            // Password visibility toggle
+            let passwordVisible = false;
+            toggleVisibility.addEventListener('click', function() {
+                passwordVisible = !passwordVisible;
+                passwordInput.type = passwordVisible ? 'text' : 'password';
+                toggleVisibility.textContent = passwordVisible ? '🙈' : '👁️';
+            });
+            
+            // Password strength calculation
+            function calculatePasswordStrength(password) {
+                let strength = 0;
+                let requirements = {
+                    length: false,
+                    uppercase: false,
+                    lowercase: false,
+                    number: false,
+                    special: false
+                };
+                
+                // Length requirement (min 12 characters)
+                if (password.length >= 12) {
+                    strength += 25;
+                    requirements.length = true;
+                }
+                
+                // Character diversity
+                if (/[A-Z]/.test(password)) {
+                    strength += 15;
+                    requirements.uppercase = true;
+                }
+                if (/[a-z]/.test(password)) {
+                    strength += 15;
+                    requirements.lowercase = true;
+                }
+                if (/[0-9]/.test(password)) {
+                    strength += 15;
+                    requirements.number = true;
+                }
+                if (/[^A-Za-z0-9]/.test(password)) {
+                    strength += 15;
+                    requirements.special = true;
+                }
+                
+                // Deductions for common patterns
+                if (password.length < 8) strength = Math.max(0, strength - 30);
+                if (/(.)\1\1/.test(password)) strength = Math.max(0, strength - 20); // Repeated characters
+                if (/password|123456|qwerty/i.test(password)) strength = Math.max(0, strength - 50);
+                
+                // Bonus for length beyond minimum
+                if (password.length > 16) strength += 10;
+                if (password.length > 20) strength += 10;
+                
+                // Ensure strength is between 0 and 100
+                strength = Math.min(100, Math.max(0, strength));
+                
+                return {
+                    strength: strength,
+                    requirements: requirements
+                };
+            }
+            
+            // Update UI based on password strength
+            function updatePasswordStrength() {
+                const password = passwordInput.value;
+                const result = calculatePasswordStrength(password);
+                
+                // Update strength bar
+                strengthBar.style.width = result.strength + '%';
+                
+                // Update strength text and color
+                let strengthLevel, description, color;
+                
+                if (result.strength === 0) {
+                    strengthLevel = 'No Password';
+                    description = 'Please enter a password to analyze';
+                    color = '#718096';
+                } else if (result.strength < 30) {
+                    strengthLevel = 'Very Weak';
+                    description = 'Easily guessable and vulnerable to attacks';
+                    color = '#e53e3e';
+                } else if (result.strength < 50) {
+                    strengthLevel = 'Weak';
+                    description = 'Vulnerable to brute force attacks';
+                    color = '#dd6b20';
+                } else if (result.strength < 70) {
+                    strengthLevel = 'Moderate';
+                    description = 'Provides basic protection but could be improved';
+                    color = '#d69e2e';
+                } else if (result.strength < 90) {
+                    strengthLevel = 'Strong';
+                    description = 'Good protection against most attacks';
+                    color = '#38a169';
+                } else {
+                    strengthLevel = 'Very Strong';
+                    description = 'Excellent protection against sophisticated attacks';
+                    color = '#2f855a';
+                }
+                
+                strengthText.textContent = strengthLevel;
+                strengthText.style.color = color;
+                strengthBar.style.backgroundColor = color;
+                strengthDescription.textContent = description;
+                
+                // Update requirement indicators
+                updateRequirementsUI(result.requirements);
+            }
+            
+            // Update requirement UI indicators
+            function updateRequirementsUI(requirements) {
+                updateRequirement(lengthReq, requirements.length);
+                updateRequirement(uppercaseReq, requirements.uppercase);
+                updateRequirement(lowercaseReq, requirements.lowercase);
+                updateRequirement(numberReq, requirements.number);
+                updateRequirement(specialReq, requirements.special);
+            }
+            
+            function updateRequirement(element, met) {
+                const icon = element.querySelector('.requirement-icon');
+                icon.textContent = met ? '✅' : '❌';
+                icon.className = 'requirement-icon ' + (met ? 'requirement-met' : 'requirement-not-met');
+            }
+            
+            // Generate a strong password
+            function generateStrongPassword() {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+                let password = '';
+                
+                // Generate 16-character password
+                for (let i = 0; i < 16; i++) {
+                    password += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                
+                passwordInput.value = password;
+                passwordInput.type = 'text';
+                passwordVisible = true;
+                toggleVisibility.textContent = '🙈';
+                updatePasswordStrength();
+            }
+            
+            // Event listeners
+            passwordInput.addEventListener('input', updatePasswordStrength);
+            generatePasswordBtn.addEventListener('click', generateStrongPassword);
+            analyzePasswordBtn.addEventListener('click', updatePasswordStrength);
+            
+            // Cookie consent
+            if (!localStorage.getItem('cookieConsent')) {
+                consentBanner.style.display = 'flex';
+            }
+            
+            acceptCookies.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'accepted');
+                consentBanner.style.display = 'none';
+            });
+            
+            rejectCookies.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'rejected');
+                consentBanner.style.display = 'none';
+            });
+            
+            // Initialize
+            updatePasswordStrength();
+        });
+        
+        // JSON-LD structured data
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Password Strength Analyzer",
+            "description": "Free online tool to check the strength of your passwords and get security recommendations",
+            "applicationCategory": "SecurityApplication",
+            "operatingSystem": "All",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "1245"
+            }
+        };
+        
+        // Add structured data to the page
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.text = JSON.stringify(structuredData);
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
